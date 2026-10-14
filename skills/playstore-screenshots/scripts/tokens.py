@@ -116,8 +116,11 @@ def report(session, since):
         writes = t['write5m'] + t['write1h']
         print(f"{model:<20}{t['calls']:>6}{t['input']:>10,}{writes:>13,}{t['read']:>13,}{t['output']:>10,}"
               f"{('$%.2f' % cost) if cost is not None else 'n/a':>10}")
-    total_tokens = sum(t['input'] + t['write5m'] + t['write1h'] + t['read'] + t['output'] for t in totals.values())
-    print(f'total {total_tokens:,} tokens, est. ${grand:.2f} at API list prices ({PRICES_AS_OF})')
+    # Cache reads are the same context re-sent on every call, so report them apart from new tokens.
+    new_tokens = sum(t['input'] + t['write5m'] + t['write1h'] + t['output'] for t in totals.values())
+    reread = sum(t['read'] for t in totals.values())
+    print(f'{new_tokens:,} new tokens + {reread:,} re-read from cache, '
+          f'est. ${grand:.2f} at API list prices ({PRICES_AS_OF})')
     if unknown:
         print('no price for: ' + ', '.join(unknown) + ' (not included in $)')
 

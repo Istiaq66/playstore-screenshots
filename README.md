@@ -64,10 +64,21 @@ Each run ends with a table read from the Claude Code session log, subagents incl
 ```
 model                calls     input  cache write   cache read    output    est. $
 claude-opus-5-5         76       152      102,569    7,623,163    25,983     $2.87
-total 7,751,867 tokens, est. $2.87 at API list prices (2026-09-25)
+128,704 new tokens + 7,623,163 re-read from cache, est. $2.87 at API list prices (2026-09-25)
 ```
 
-That is the first real run, 8 screenshots of a fitness app, done before this skill existed. Almost all of it is cache reads (each screenshot Claude looks at stays in context), which bill at a small fraction of the input price. On a Claude subscription nothing is charged per token, so the dollar figure is what the same run would cost on the API.
+**On a Claude subscription (Pro or Max), a run costs nothing extra.** It counts toward your plan's usage like any other session. The dollar figure is what the same run would cost on the API.
+
+**Why the cache-read number is so large.** Claude Code sends the conversation again on every step, and in this skill a step is one tap or capture; this run took 76. Everything already in the conversation, such as the screen previews Claude has looked at, is read again from the cache on each step, so the same content is counted many times over. Only about 129K tokens were new. Cache reads bill at a small fraction of the input price (5% for Opus 5.5), which is why 7.6 million of them came to about $1.50:
+
+| Part | Tokens | Est. cost |
+|---|---|---|
+| Cache reads | 7,623,163 | $1.52 |
+| Cache writes | 102,569 | $0.82 |
+| Output | 25,983 | $0.52 |
+| New input | 152 | under $0.01 |
+
+These figures are from the first real run, 8 screenshots of a fitness app, made before this skill existed. The skill now has Claude read a 360×640 preview of each capture instead of the full 1080×1920 image, so every step carries less. Asking for fewer screens also means fewer steps.
 
 You can run the meter on its own:
 
