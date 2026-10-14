@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "playstore-screenshots",
+  "description": "Claude Code plugins for shipping Android apps to Google Play.",
+  "owner": {
+    "name": "Istiaq66",
+    "url": "https://github.com/Istiaq66"
+  },
+  "plugins": [
+    {
+      "name": "playstore-screenshots",
+      "source": "./",
+      "description": "Capture an Android app's screens from an emulator and turn them into captioned Google Play Store screenshots, with a token and cost report for each run."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "playstore-screenshots",
+  "version": "0.1.0",
+  "description": "Capture an Android app's screens from an emulator and turn them into captioned Google Play Store screenshots, with a token and cost report for each run.",
+  "author": {
+    "name": "Istiaq66",
+    "url": "https://github.com/Istiaq66"
+  },
+  "homepage": "https://github.com/Istiaq66/playstore-screenshots",
+  "repository": "https://github.com/Istiaq66/playstore-screenshots",
+  "license": "MIT",
+  "keywords": [
+    "android",
+    "flutter",
+    "play-store",
+    "screenshots",
+    "adb",
+    "emulator"
+  ]
+}
